@@ -116,6 +116,6 @@ func Equal(expected, actual interface{}) bool {
 	return false
 }
 
-func Not(value bool) bool {
-	return !value
+func NotEqual(expected, actual interface{}) bool {
+	return !Equal(expected, actual)
 }

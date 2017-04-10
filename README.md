@@ -5,20 +5,42 @@ A simple lightweight assert extension for use with testing.T
 # Example usage
 
 ```
-	Assert(t, 1, EqualInt, 1, "Expected both to be equal")
-	Assert(t, someArray, Len, 3, "Expected array with a length of 3")
+func TestSimpleTransitions(t *testing.T) {
+	tr := fsm.NewTransitions()
+	assert.NotNil(t, tr, "Transitions should have been created")
+
+    assert.Equal(t, 12,12, "Should match")
+    assert.NotEqual(t, "expected", "actual", "Should not match")
+
+	tr.Add(Red, RedAmber, nil, nil, "")
+
+	ok, g, a := tr.Get(Red, Green)
+	assert.False(t, ok, "Red, Green not expected")
+	assert.Nil(t, g)
+	assert.Nil(t, a)
+
+	ok, g, a = tr.Get(Red, RedAmber)
+	assert.True(t, ok, "Expected Red, RedAmber")
+	assert.Nil(t, g)
+	assert.Nil(t, a)
+}
 ```
 
 Currently there are the following comparison functions
 
-* EqualDeep
-* EqualString
-* EqualInt
-* EqualFloat
-* NotEqualDeep
-* NotEqualString
-* NotEqualInt
-* NotEqualFloat
+* Equal | NotEqual
 * Len
+* Nil | NotNil
+* True | False
+* Error | NotError
 
-Feel free to contribute more comparisons that are useful.
+
+Generally each methods is supplied with:
+
+1. a ```*testing.T``` as the first parameter.
+2. An **expected** then **actual** value (e.g. for Equal & Len) or just an **actual** value
+3. *Optional* Messages that will be output on a failure
+
+
+
+

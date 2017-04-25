@@ -97,15 +97,15 @@ func NotError(t *testing.T, actual error, message ...string) {
 }
 
 // Checks that the lengths of the supplied Slice | Map | String are the same
-func Len(t *testing.T, expected, actual interface{}, message ...string) {
-	if !compareLength(expected, actual) {
+func Len(t *testing.T, expected int, actual interface{}, message ...string) {
+	if !compareLength(actual, expected) {
 		t.Errorf("%v Expected length \n[%#v]\nto be\n[%#v]\n%v ", message, expected, actual, callerInfo(2))
 	}
 }
 
 // compares lengths dependant on teh type of variables passed in for comparison
 // panics if the type is not Slice | Map | String
-func compareLength(a, b interface{}) bool {
+func compareLength(a interface{}, b int) bool {
 	switch reflect.TypeOf(a).Kind() {
 	case reflect.Slice:
 		s := reflect.ValueOf(a)

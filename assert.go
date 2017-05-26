@@ -16,8 +16,10 @@ func Equal(t *testing.T, expected, actual interface{}, message ...string) {
 }
 
 // NotEqual utilises the same method as Equal but returns the complement
-func NotEqual(expected, actual interface{}) bool {
-	return !compareEquality(expected, actual)
+func NotEqual(t *testing.T, expected, actual interface{}, message ...string) {
+	if compareEquality(expected, actual) {
+		t.Errorf("%v Expected \n[%#v]\n NOT to be\n[%#v]\n%v ", message, expected, actual, callerInfo(2))
+	}
 }
 
 // Checks that the supplied expected and actual objects are compareEquality

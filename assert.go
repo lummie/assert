@@ -11,14 +11,14 @@ import (
 // Equal tries to establish if the two values are compareEquality via reflection and if that fails then via conversion to string
 func Equal(t *testing.T, expected, actual interface{}, message ...string) {
 	if !compareEquality(expected, actual) {
-		t.Errorf("%v\nExpected \n\t[%#v]\nto be\n\t[%#v]\n%v ", message, expected, actual, callerInfo(2))
+		t.Errorf("%v\nExpected \n\t[%#v]\nto be\n\t[%#v]\n%v ", message, actual, expected, callerInfo(2))
 	}
 }
 
 // NotEqual utilises the same method as Equal but returns the complement
 func NotEqual(t *testing.T, expected, actual interface{}, message ...string) {
 	if compareEquality(expected, actual) {
-		t.Errorf("%v\nExpected \n\t[%#v]\n NOT to be\n\t[%#v]\n%v ", message, expected, actual, callerInfo(2))
+		t.Errorf("%v\nExpected \n\t[%#v]\n NOT to be\n\t[%#v]\n%v ", message, actual, expected, callerInfo(2))
 	}
 }
 
@@ -101,7 +101,7 @@ func NotError(t *testing.T, actual error, message ...string) {
 // Checks that the lengths of the supplied Slice | Map | String are the same
 func Len(t *testing.T, expected int, actual interface{}, message ...string) {
 	if !compareLength(actual, expected) {
-		t.Errorf("%v\n Expected length \n\t[%#v]\nto be\n\t[%#v]\n%v ", message, expected, actual, callerInfo(2))
+		t.Errorf("%v\n Expected length \n\t[%#v]\nto be\n\t[%#v]\n%v ", message, actual, expected, callerInfo(2))
 	}
 }
 

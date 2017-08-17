@@ -11,14 +11,14 @@ import (
 // Equal tries to establish if the two values are compareEquality via reflection and if that fails then via conversion to string
 func Equal(t *testing.T, expected, actual interface{}, message ...string) {
 	if !compareEquality(expected, actual) {
-		t.Errorf("%v Expected \n[%#v]\nto be\n[%#v]\n%v ", message, actual, expected, callerInfo(2))
+		t.Errorf("%v\nExpected \n\t[%#v]\nto be\n\t[%#v]\n%v ", message, expected, actual, callerInfo(2))
 	}
 }
 
 // NotEqual utilises the same method as Equal but returns the complement
 func NotEqual(t *testing.T, expected, actual interface{}, message ...string) {
 	if compareEquality(expected, actual) {
-		t.Errorf("%v Expected \n[%#v]\n NOT to be\n[%#v]\n%v ", message, actual, expected, callerInfo(2))
+		t.Errorf("%v\nExpected \n\t[%#v]\n NOT to be\n\t[%#v]\n%v ", message, expected, actual, callerInfo(2))
 	}
 }
 
@@ -59,49 +59,49 @@ func compareEquality(expected, actual interface{}) bool {
 // Nil checks that the actual value is nil
 func Nil(t *testing.T, actual interface{}, message ...string) {
 	if !reflect.ValueOf(actual).IsNil() {
-		t.Errorf("%v Expected \n[%#v]\nto be\nnil\n%v ", message, actual, callerInfo(2))
+		t.Errorf("%v\n Expected \n\t[%#v]\nto be\n\tnil\n%v ", message, actual, callerInfo(2))
 	}
 }
 
 // NotNil checks that the actual value is not nil
 func NotNil(t *testing.T, actual interface{}, message ...string) {
 	if reflect.ValueOf(actual).IsNil() {
-		t.Errorf("%v Expected \n[%#v]\nnot to be\nnil\n%v ", message, actual, callerInfo(2))
+		t.Errorf("%v\n Expected \n\t[%#v]\nnot to be\n\tnil\n%v ", message, actual, callerInfo(2))
 	}
 }
 
 // True checks that the actual value is true
 func True(t *testing.T, actual bool, message ...string) {
 	if actual != true {
-		t.Errorf("%v Expected \n[%#v]\nto be\nTrue\n%v ", message, actual, callerInfo(2))
+		t.Errorf("%v\n Expected \n\t[%#v]\nto be\n\tTrue\n%v ", message, actual, callerInfo(2))
 	}
 }
 
 // False checks that the actual value is false
 func False(t *testing.T, actual bool, message ...string) {
 	if actual != false {
-		t.Errorf("%v Expected \n[%#v]\nto be\nFalse\n%v ", message, actual, callerInfo(2))
+		t.Errorf("%v\n Expected \n\t[%#v]\nto be\n\tFalse\n%v ", message, actual, callerInfo(2))
 	}
 }
 
 // Error checks that the actual error is not nil (compiler will check it supports the error interface)
 func Error(t *testing.T, actual error, message ...string) {
 	if actual == nil {
-		t.Errorf("%v Expected \n[%#v]\nto be an error\n%v ", message, actual, callerInfo(2))
+		t.Errorf("%v\n Expected \n\t[%#v]\nto be an error\n%v ", message, actual, callerInfo(2))
 	}
 }
 
 // Error checks that the actual error is nil (compiler will check it supports the error interface)
 func NotError(t *testing.T, actual error, message ...string) {
 	if actual != nil {
-		t.Errorf("%v Expected \n[%#v]\nto not be an error\n%v ", message, actual, callerInfo(2))
+		t.Errorf("%v\n Expected \n\t[%#v]\nto not be an error\n%v ", message, actual, callerInfo(2))
 	}
 }
 
 // Checks that the lengths of the supplied Slice | Map | String are the same
 func Len(t *testing.T, expected int, actual interface{}, message ...string) {
 	if !compareLength(actual, expected) {
-		t.Errorf("%v Expected length \n[%#v]\nto be\n[%#v]\n%v ", message, actual, expected, callerInfo(2))
+		t.Errorf("%v\n Expected length \n\t[%#v]\nto be\n\t[%#v]\n%v ", message, expected, actual, callerInfo(2))
 	}
 }
 
@@ -119,7 +119,7 @@ func compareLength(a interface{}, b int) bool {
 		m := reflect.ValueOf(a).String()
 		return utf8.RuneCountInString(m) == b
 	}
-	panic("parameter does not have a Len")
+	panic("parameter 'a' does not have a Len")
 }
 
 // callerInfo returns the file and line number from the caller stack

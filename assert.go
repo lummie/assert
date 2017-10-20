@@ -66,7 +66,7 @@ func Nil(t *testing.T, actual interface{}, message ...string) {
 // NotNil checks that the actual value is not nil
 func NotNil(t *testing.T, actual interface{}, message ...string) {
 	if reflect.ValueOf(actual).IsNil() {
-		t.Errorf("%v Expected \n[%#v]\nnot to be\nnil\n%v ", message, actual, callerInfo(2))
+		t.Errorf("%v Expected not to be nil\n%v ", message, callerInfo(2))
 	}
 }
 

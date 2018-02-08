@@ -42,5 +42,11 @@ Generally each methods is supplied with:
 3. *Optional* Messages that will be output on a failure
 
 
+If you construct a test that asserts in a descendant function, then the line reported in the assert failure will be the 
+line in that descendant function. You can alter this so the line in the calling function is identified by adding a call 
+to `CallStackAdjust(1)` at the start of the descendant and `CallStackReset()` at the end.
+
+The parameter to CallStackAdjust is the number of stack levels UP to report, usually 1 will suffice, but if you have 
+several levels of nesting before the assert then this can be adjusted as necessary. 
 
 
